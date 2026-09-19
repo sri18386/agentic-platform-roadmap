@@ -1131,16 +1131,51 @@
         signal: opts.signal,
         body: JSON.stringify({ turns: turns, pageContent: pageContent })
       }).then(function (res) {
-        return res.json().then(function (data) {
-          if (!res.ok) {
+        if (!res.ok) {
+          return res.json().catch(function () { return {}; }).then(function (data) {
             var code = data && data.error === 'rate_limited' ? 'rate_limited' : 'upstream_error';
             var err = new Error(code);
             err.code = code;
             throw err;
-          }
-          if (opts.onText) opts.onText({ text: data.text, delta: data.text });
-          return { text: data.text, truncated: false };
-        });
+          });
+        }
+        var contentType = res.headers.get('Content-Type') || '';
+        if (!res.body || contentType.indexOf('text/event-stream') === -1) {
+          // Defensive fallback if the Worker ever answers non-streamed.
+          return res.json().then(function (data) {
+            if (opts.onText) opts.onText({ text: data.text, delta: data.text });
+            return { text: data.text, truncated: false };
+          });
+        }
+
+        var reader = res.body.getReader();
+        var decoder = new TextDecoder();
+        var buffer = '';
+        var text = '';
+
+        function pump() {
+          return reader.read().then(function (step) {
+            if (step.done) return { text: text, truncated: false };
+            buffer += decoder.decode(step.value, { stream: true });
+            var lines = buffer.split('\n');
+            buffer = lines.pop();
+            for (var i = 0; i < lines.length; i++) {
+              var line = lines[i].trim();
+              if (line.indexOf('data:') !== 0) continue;
+              var payload = line.slice(5).trim();
+              if (!payload || payload === '[DONE]') continue;
+              var parsed;
+              try { parsed = JSON.parse(payload); } catch (e) { continue; }
+              var delta = (parsed && parsed.response) || '';
+              if (delta) {
+                text += delta;
+                if (opts.onText) opts.onText({ text: text, delta: delta });
+              }
+            }
+            return pump();
+          });
+        }
+        return pump();
       }).catch(function (e) {
         if (e && e.name === 'AbortError') { var c = new Error('cancelled'); c.code = 'cancelled'; throw c; }
         if (e && e.code) throw e;

@@ -107,10 +107,14 @@ export default {
     const messages = [{ role: "system", content: systemPrompt(pageContent) }].concat(turns);
 
     try {
-      const result = await env.AI.run(MODEL, { messages: messages, max_tokens: 400 });
-      const text = (result && result.response) || "";
-      if (!text) return json({ error: "empty_completion" }, 502);
-      return json({ text: text }, 200);
+      const stream = await env.AI.run(MODEL, { messages: messages, max_tokens: 400, stream: true });
+      // Workers AI's streaming output is already newline-delimited SSE
+      // ("data: {\"response\":\"...\"}\n\n", ending "data: [DONE]\n\n"),
+      // so it's forwarded to the browser as-is; the page parses it there.
+      return new Response(stream, {
+        status: 200,
+        headers: Object.assign({ "Content-Type": "text/event-stream", "Cache-Control": "no-store" }, corsHeaders()),
+      });
     } catch (e) {
       return json({ error: "upstream_error" }, 502);
     }
