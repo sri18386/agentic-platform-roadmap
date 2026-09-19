@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>Agentic Platform Roadmap</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -288,6 +289,59 @@
   .capability li::marker {
     color: var(--phase-color, var(--primary));
   }
+
+  .capability-diagram {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 76px;
+    margin-bottom: 12px;
+    color: var(--muted-foreground);
+  }
+  .capability-diagram .accent { color: var(--phase-color, var(--primary)); }
+  .capability-diagram text {
+    font-family: var(--font-mono);
+    font-size: 8.5px;
+    fill: currentColor;
+  }
+
+  .rail .dot svg { width: 18px; height: 18px; }
+
+  figure.overview-figure {
+    margin: 0 0 44px;
+  }
+  .overview-diagram {
+    display: block;
+    width: 100%;
+    height: auto;
+    color: var(--muted-foreground);
+  }
+  .overview-diagram text { font-family: var(--font-mono); fill: currentColor; }
+  .overview-diagram .phase-box-label {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    fill: var(--card-foreground);
+  }
+  .overview-diagram .phase-box-num {
+    font-family: var(--font-mono);
+    fill: var(--muted-foreground);
+  }
+  figure.overview-figure figcaption {
+    font-size: 12px;
+    color: var(--muted-foreground);
+    margin-top: 10px;
+    max-width: 60ch;
+  }
+
+  .argument-diagram {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 480px;
+    margin: 20px 0 4px;
+    color: var(--muted-foreground);
+  }
+  .argument-diagram text { font-family: var(--font-mono); font-size: 10px; fill: currentColor; }
 
   .signal {
     background: var(--phase-subtle, var(--muted));
@@ -610,11 +664,86 @@
     </nav>
   </header>
 
+  <figure class="overview-figure">
+    <div style="overflow-x: auto;">
+      <svg class="overview-diagram" style="min-width: 720px;" viewBox="0 0 880 300" role="img" aria-label="The five phases run left to right, each depending on the one before it. The eight cross-cutting modules run underneath as one band, maturing in parallel across all five phases rather than phase by phase.">
+        <defs>
+          <marker id="ov-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path>
+          </marker>
+        </defs>
+
+        <g>
+          <rect x="30" y="30" width="140" height="76" rx="10" style="fill: var(--primary); fill-opacity: 0.12; stroke: var(--primary);"></rect>
+          <g transform="translate(88,40)" style="color: var(--primary);" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="3" y="13" width="8" height="8" rx="1"></rect><rect x="13" y="13" width="8" height="8" rx="1"></rect><rect x="8" y="3" width="8" height="8" rx="1"></rect>
+          </g>
+          <text x="100" y="80" text-anchor="middle" class="phase-box-num">01</text>
+          <text x="100" y="96" text-anchor="middle" class="phase-box-label">Foundation</text>
+        </g>
+
+        <g>
+          <rect x="200" y="30" width="140" height="76" rx="10" style="fill: var(--connect); fill-opacity: 0.12; stroke: var(--connect);"></rect>
+          <g transform="translate(258,40)" style="color: var(--connect);" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round">
+            <circle cx="6" cy="6" r="2.4"></circle><circle cx="18" cy="6" r="2.4"></circle><circle cx="12" cy="18" r="2.4"></circle>
+            <line x1="6" y1="6" x2="18" y2="6"></line><line x1="6" y1="6" x2="12" y2="18"></line><line x1="18" y1="6" x2="12" y2="18"></line>
+          </g>
+          <text x="270" y="80" text-anchor="middle" class="phase-box-num">02</text>
+          <text x="270" y="96" text-anchor="middle" class="phase-box-label">Orchestration</text>
+        </g>
+
+        <g>
+          <rect x="370" y="30" width="140" height="76" rx="10" style="fill: var(--shield); fill-opacity: 0.12; stroke: var(--shield);"></rect>
+          <g transform="translate(428,40)" style="color: var(--shield);" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M12 2.5 L19.5 5.5 L19.5 11 C19.5 16.5 12 20.5 12 20.5 C12 20.5 4.5 16.5 4.5 11 L4.5 5.5 Z"></path>
+          </g>
+          <text x="440" y="80" text-anchor="middle" class="phase-box-num">03</text>
+          <text x="440" y="96" text-anchor="middle" class="phase-box-label">Governance</text>
+        </g>
+
+        <g>
+          <rect x="540" y="30" width="140" height="76" rx="10" style="fill: var(--caution); fill-opacity: 0.12; stroke: var(--caution);"></rect>
+          <g transform="translate(598,40)" style="color: var(--caution);">
+            <path d="M13 2 L4.5 13.5 L11 13.5 L9.5 22 L19.5 9.5 L12.5 9.5 Z" fill="currentColor" stroke="none"></path>
+          </g>
+          <text x="610" y="80" text-anchor="middle" class="phase-box-num">04</text>
+          <text x="610" y="96" text-anchor="middle" class="phase-box-label">Autonomous action</text>
+        </g>
+
+        <g>
+          <rect x="710" y="30" width="140" height="76" rx="10" style="fill: var(--scale-accent); fill-opacity: 0.16; stroke: var(--scale-accent);"></rect>
+          <g transform="translate(768,40)" style="color: var(--scale-accent);" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round">
+            <polyline points="4,10 4,4 10,4"></polyline><polyline points="20,14 20,20 14,20"></polyline>
+          </g>
+          <text x="780" y="80" text-anchor="middle" class="phase-box-num">05</text>
+          <text x="780" y="96" text-anchor="middle" class="phase-box-label">Scale</text>
+        </g>
+
+        <line x1="170" y1="68" x2="196" y2="68" stroke="currentColor" stroke-width="1.5" marker-end="url(#ov-arrow)"></line>
+        <text x="183" y="60" text-anchor="middle" style="font-size: 9px;">depends on</text>
+        <line x1="340" y1="68" x2="366" y2="68" stroke="currentColor" stroke-width="1.5" marker-end="url(#ov-arrow)"></line>
+        <line x1="510" y1="68" x2="536" y2="68" stroke="currentColor" stroke-width="1.5" marker-end="url(#ov-arrow)"></line>
+        <line x1="680" y1="68" x2="706" y2="68" stroke="currentColor" stroke-width="1.5" marker-end="url(#ov-arrow)"></line>
+
+        <line x1="100" y1="106" x2="100" y2="214" stroke="currentColor" stroke-width="1.25" stroke-dasharray="3,3" stroke-opacity="0.5" marker-end="url(#ov-arrow)"></line>
+        <line x1="270" y1="106" x2="270" y2="214" stroke="currentColor" stroke-width="1.25" stroke-dasharray="3,3" stroke-opacity="0.5" marker-end="url(#ov-arrow)"></line>
+        <line x1="440" y1="106" x2="440" y2="214" stroke="currentColor" stroke-width="1.25" stroke-dasharray="3,3" stroke-opacity="0.5" marker-end="url(#ov-arrow)"></line>
+        <line x1="610" y1="106" x2="610" y2="214" stroke="currentColor" stroke-width="1.25" stroke-dasharray="3,3" stroke-opacity="0.5" marker-end="url(#ov-arrow)"></line>
+        <line x1="780" y1="106" x2="780" y2="214" stroke="currentColor" stroke-width="1.25" stroke-dasharray="3,3" stroke-opacity="0.5" marker-end="url(#ov-arrow)"></line>
+
+        <text x="440" y="204" text-anchor="middle" style="font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;">Cross-cutting modules, maturing in parallel</text>
+        <rect x="30" y="220" width="820" height="42" rx="8" style="fill: var(--muted); stroke: var(--border);"></rect>
+        <text x="440" y="245" text-anchor="middle" style="font-size: 10.5px;">Knowledge &#183; Tools &#183; Memory &#183; Model routing &#183; Guardrails &#183; Observability &#183; Access &#183; FinOps</text>
+      </svg>
+    </div>
+    <figcaption>The five phases build on each other in sequence. The eight infrastructure modules underneath mature in parallel across all of them at once, not phase by phase.</figcaption>
+  </figure>
+
   <main>
 
     <section class="phase" id="phase-1">
       <div class="phase-row">
-        <div class="rail"><div class="dot">01</div><div class="line"></div></div>
+        <div class="rail"><div class="dot" aria-label="Phase 01"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round" role="img" aria-hidden="true"><rect x="3" y="13" width="8" height="8" rx="1"></rect><rect x="13" y="13" width="8" height="8" rx="1"></rect><rect x="8" y="3" width="8" height="8" rx="1"></rect></svg></div><div class="line"></div></div>
         <div class="phase-content">
           <div class="eyebrow">Phase 01</div>
           <h2>Foundation</h2>
@@ -699,7 +828,7 @@
 
     <section class="phase" id="phase-2">
       <div class="phase-row">
-        <div class="rail"><div class="dot">02</div><div class="line"></div></div>
+        <div class="rail"><div class="dot" aria-label="Phase 02"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round" role="img" aria-hidden="true"><circle cx="6" cy="6" r="2.4"></circle><circle cx="18" cy="6" r="2.4"></circle><circle cx="12" cy="18" r="2.4"></circle><line x1="6" y1="6" x2="18" y2="6"></line><line x1="6" y1="6" x2="12" y2="18"></line><line x1="18" y1="6" x2="12" y2="18"></line></svg></div><div class="line"></div></div>
         <div class="phase-content">
           <div class="eyebrow">Phase 02</div>
           <h2>Orchestration</h2>
@@ -708,6 +837,15 @@
           <div class="capabilities">
             <div class="capability">
               <h3>Multi-agent handoffs</h3>
+              <svg class="capability-diagram" viewBox="0 0 200 80" role="img" aria-label="Three agents in a row, A, B and C, connected by arrows in sequence.">
+                <defs><marker id="mk1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path></marker></defs>
+                <line x1="42" y1="40" x2="86" y2="40" stroke="currentColor" stroke-width="1.5" marker-end="url(#mk1)"></line>
+                <line x1="112" y1="40" x2="156" y2="40" stroke="currentColor" stroke-width="1.5" marker-end="url(#mk1)"></line>
+                <circle cx="30" cy="40" r="12" class="accent" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                <circle cx="100" cy="40" r="12" class="accent" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                <circle cx="170" cy="40" r="12" class="accent" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                <text x="30" y="43" text-anchor="middle">A</text><text x="100" y="43" text-anchor="middle">B</text><text x="170" y="43" text-anchor="middle">C</text>
+              </svg>
               <ul>
                 <li>The same canvas, now sequencing between agents rather than plain steps</li>
                 <li>Supports nested sub-flows</li>
@@ -716,10 +854,34 @@
             </div>
             <div class="capability">
               <h3>Shared context layer</h3>
+              <svg class="capability-diagram" viewBox="0 0 200 80" role="img" aria-label="Three agents in sequence, each reading from and writing to one shared state box underneath all of them.">
+                <defs><marker id="mk2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path></marker></defs>
+                <line x1="41" y1="28" x2="89" y2="28" stroke="currentColor" stroke-width="1.5" marker-end="url(#mk2)"></line>
+                <line x1="111" y1="28" x2="159" y2="28" stroke="currentColor" stroke-width="1.5" marker-end="url(#mk2)"></line>
+                <circle cx="30" cy="28" r="10" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                <circle cx="100" cy="28" r="10" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                <circle cx="170" cy="28" r="10" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                <line x1="30" y1="39" x2="30" y2="58" stroke="currentColor" stroke-width="1" stroke-dasharray="2,2"></line>
+                <line x1="100" y1="39" x2="100" y2="58" stroke="currentColor" stroke-width="1" stroke-dasharray="2,2"></line>
+                <line x1="170" y1="39" x2="170" y2="58" stroke="currentColor" stroke-width="1" stroke-dasharray="2,2"></line>
+                <rect x="10" y="58" width="180" height="16" rx="4" class="accent" fill="none" stroke="currentColor" stroke-width="1.5"></rect>
+                <text x="100" y="69" text-anchor="middle">shared state</text>
+              </svg>
               <p>State that persists across a multi-agent run instead of resetting at every handoff, so a workflow remembers what happened three steps ago.</p>
             </div>
             <div class="capability">
               <h3>Routing</h3>
+              <svg class="capability-diagram" viewBox="0 0 200 80" role="img" aria-label="One request reaching a fork with three possible paths; only the middle, matching path is taken, the other two stay unused." style="max-height: 90px;">
+                <defs><marker id="mk3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path></marker></defs>
+                <line x1="36" y1="38" x2="156" y2="17" stroke="currentColor" stroke-width="1" stroke-dasharray="2,2" stroke-opacity="0.4"></line>
+                <line x1="36" y1="40" x2="156" y2="40" class="accent" stroke="currentColor" stroke-width="2" marker-end="url(#mk3)"></line>
+                <line x1="36" y1="42" x2="156" y2="63" stroke="currentColor" stroke-width="1" stroke-dasharray="2,2" stroke-opacity="0.4"></line>
+                <circle cx="25" cy="40" r="11" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                <text x="25" y="43" text-anchor="middle">in</text>
+                <circle cx="167" cy="15" r="8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-opacity="0.4"></circle>
+                <circle cx="167" cy="40" r="8" class="accent" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                <circle cx="167" cy="65" r="8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-opacity="0.4"></circle>
+              </svg>
               <ul>
                 <li>A classifier step inspects the request first</li>
                 <li>Sends it down the specific path built for that kind of work, instead of running everything through one general path</li>
@@ -727,6 +889,19 @@
             </div>
             <div class="capability">
               <h3>Manager-agent pattern</h3>
+              <svg class="capability-diagram" viewBox="0 0 200 80" role="img" aria-label="A central manager connected to three specialized sub-agents around it, delegating and collecting work from each.">
+                <line x1="100" y1="40" x2="45" y2="18" stroke="currentColor" stroke-width="1.25"></line>
+                <line x1="100" y1="40" x2="155" y2="18" stroke="currentColor" stroke-width="1.25"></line>
+                <line x1="100" y1="40" x2="100" y2="66" stroke="currentColor" stroke-width="1.25"></line>
+                <circle cx="100" cy="40" r="14" class="accent" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                <text x="100" y="43" text-anchor="middle">mgr</text>
+                <circle cx="40" cy="14" r="9" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                <text x="40" y="17" text-anchor="middle">1</text>
+                <circle cx="160" cy="14" r="9" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                <text x="160" y="17" text-anchor="middle">2</text>
+                <circle cx="100" cy="72" r="9" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                <text x="100" y="75" text-anchor="middle">3</text>
+              </svg>
               <ul>
                 <li>A coordinating agent assigns work across a set of specialized sub-agents and lets them find the path non-deterministically</li>
                 <li>For tasks where the right sequence isn't known ahead of time</li>
@@ -734,6 +909,24 @@
             </div>
             <div class="capability">
               <h3>Agent swarm</h3>
+              <svg class="capability-diagram" viewBox="0 0 200 80" role="img" aria-label="One task fanning out to four identical parallel copies of the same agent, then recombining into one output.">
+                <line x1="28" y1="40" x2="92" y2="12" stroke="currentColor" stroke-width="1"></line>
+                <line x1="28" y1="40" x2="92" y2="31" stroke="currentColor" stroke-width="1"></line>
+                <line x1="28" y1="40" x2="92" y2="49" stroke="currentColor" stroke-width="1"></line>
+                <line x1="28" y1="40" x2="92" y2="68" stroke="currentColor" stroke-width="1"></line>
+                <line x1="108" y1="12" x2="172" y2="40" stroke="currentColor" stroke-width="1"></line>
+                <line x1="108" y1="31" x2="172" y2="40" stroke="currentColor" stroke-width="1"></line>
+                <line x1="108" y1="49" x2="172" y2="40" stroke="currentColor" stroke-width="1"></line>
+                <line x1="108" y1="68" x2="172" y2="40" stroke="currentColor" stroke-width="1"></line>
+                <circle cx="20" cy="40" r="9" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                <text x="20" y="43" text-anchor="middle">in</text>
+                <circle cx="100" cy="12" r="7" class="accent" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                <circle cx="100" cy="31" r="7" class="accent" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                <circle cx="100" cy="49" r="7" class="accent" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                <circle cx="100" cy="68" r="7" class="accent" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                <circle cx="180" cy="40" r="9" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                <text x="180" y="43" text-anchor="middle">out</text>
+              </svg>
               <ul>
                 <li>The same subtask sent to many parallel instances of one agent at once, dividing a large task by volume rather than by specialization</li>
                 <li>The pattern to reach for when the bottleneck is throughput, not decision-making</li>
@@ -741,6 +934,16 @@
             </div>
             <div class="capability">
               <h3>Evaluator-optimizer loop</h3>
+              <svg class="capability-diagram" viewBox="0 0 200 80" role="img" aria-label="A draft agent and a critique agent, with the draft sent forward for review and revisions looping back until it passes.">
+                <defs><marker id="mk6" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path></marker></defs>
+                <line x1="69" y1="34" x2="131" y2="34" stroke="currentColor" stroke-width="1.5" marker-end="url(#mk6)"></line>
+                <path d="M131,50 Q100,70 69,50" fill="none" stroke="currentColor" stroke-width="1.25" stroke-dasharray="2,2" marker-end="url(#mk6)"></path>
+                <circle cx="55" cy="40" r="15" class="accent" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                <text x="55" y="43" text-anchor="middle">draft</text>
+                <circle cx="145" cy="40" r="15" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                <text x="145" y="43" text-anchor="middle">critique</text>
+                <text x="100" y="70" text-anchor="middle">revise</text>
+              </svg>
               <ul>
                 <li>One agent produces a draft, a second independent one critiques it against a rubric</li>
                 <li>Catches a flawed first attempt before it reaches a person or another system</li>
@@ -758,7 +961,7 @@
 
     <section class="phase" id="phase-3">
       <div class="phase-row">
-        <div class="rail"><div class="dot">03</div><div class="line"></div></div>
+        <div class="rail"><div class="dot" aria-label="Phase 03"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round" role="img" aria-hidden="true"><path d="M12 2.5 L19.5 5.5 L19.5 11 C19.5 16.5 12 20.5 12 20.5 C12 20.5 4.5 16.5 4.5 11 L4.5 5.5 Z"></path></svg></div><div class="line"></div></div>
         <div class="phase-content">
           <div class="eyebrow">Phase 03</div>
           <h2>Governance</h2>
@@ -788,6 +991,7 @@
                 <li>An automated way to test against a set of cases, catch failures, and have the agent rewrite its own instructions to fix them before anything ships</li>
                 <li>Every response checked for whether it's actually grounded in the source it cites, not merely plausible-sounding</li>
                 <li>Scoring covers the path taken, not just the final answer, since two runs can reach the same result by very different, not equally safe, routes</li>
+                <li>A sample of live production traffic is re-evaluated on the same rubric on a schedule, not just once before shipping, so a quality regression surfaces even after an agent has been running for months</li>
               </ul>
             </div>
             <div class="capability">
@@ -810,7 +1014,7 @@
 
     <section class="phase" id="phase-4">
       <div class="phase-row">
-        <div class="rail"><div class="dot">04</div><div class="line"></div></div>
+        <div class="rail"><div class="dot" aria-label="Phase 04"><svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M13 2 L4.5 13.5 L11 13.5 L9.5 22 L19.5 9.5 L12.5 9.5 Z" fill="currentColor" stroke="none"></path></svg></div><div class="line"></div></div>
         <div class="phase-content">
           <div class="eyebrow">Phase 04</div>
           <h2>Autonomous action</h2>
@@ -846,7 +1050,7 @@
 
     <section class="phase" id="phase-5">
       <div class="phase-row">
-        <div class="rail"><div class="dot">05</div></div>
+        <div class="rail"><div class="dot" aria-label="Phase 05"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round" role="img" aria-hidden="true"><polyline points="4,10 4,4 10,4"></polyline><polyline points="20,14 20,20 14,20"></polyline></svg></div></div>
         <div class="phase-content">
           <div class="eyebrow">Phase 05</div>
           <h2>Scale</h2>
@@ -917,11 +1121,11 @@
         <h3>Knowledge and retrieval</h3>
         <p class="module-def">How an agent finds a fact it doesn't already have, from documents, structured data or the web.</p>
         <div class="module-track">
-          <div class="track-step" style="--step-color: var(--primary)"><span class="step-phase">01 Foundation</span>Standard retrieval over a set of uploaded documents, one knowledge base attached per agent.</div>
+          <div class="track-step" style="--step-color: var(--primary)"><span class="step-phase">01 Foundation</span>Standard document retrieval and structured, relationship-aware graph retrieval are both available from the start, one knowledge base or graph attached per agent.</div>
           <div class="track-step" style="--step-color: var(--connect)"><span class="step-phase">02 Orchestration</span>A single request pulls from multiple knowledge sources in one pass, and a workflow step can query structured data directly in plain language, not just documents.</div>
           <div class="track-step" style="--step-color: var(--shield)"><span class="step-phase">03 Governance</span>Retrieval is auditable, so an answer traces back to the exact source and passage it came from, part of the same evidence trail as everything else the agent did.</div>
           <div class="track-step" style="--step-color: var(--caution)"><span class="step-phase">04 Autonomous action</span>Knowledge sources stay live and synced rather than a one-time upload, since an agent acting on stale information is worse than one that just answers slowly.</div>
-          <div class="track-step" style="--step-color: var(--scale-accent)"><span class="step-phase">05 Scale</span>A knowledge base or graph ships pre-connected as part of a template, built from the sources a given function already trusts.</div>
+          <div class="track-step" style="--step-color: var(--scale-accent)"><span class="step-phase">05 Scale</span>A knowledge base or graph ships pre-connected as part of a template, and what proves out across teams consolidates into one organization-wide semantic layer instead of staying fragmented in each team's own copy.</div>
         </div>
       </div>
 
@@ -1014,6 +1218,23 @@
       <div class="eyebrow">Reading the roadmap</div>
       <h2>One argument, five phases</h2>
       <p class="thesis">Capability should never outrun governance. Every phase after Foundation either adds capability or catches up on control, and the two need to stay roughly level. An organization that reaches Phase 04 without a real Phase 03 has only deferred the cost of governance, to the moment an agent does something no one approved. Independent industry estimates put the share of agentic AI projects canceled by 2027 above 40 percent, most often from cost overruns, unclear value, or exactly this gap between capability and control.</p>
+
+      <figure>
+        <svg class="argument-diagram" viewBox="0 0 480 220" role="img" aria-label="A conceptual sketch, not measured data: capability rises faster than governance across the five phases, opening a widening risk zone wherever the gap between them grows.">
+          <line x1="50" y1="180" x2="400" y2="180" stroke="currentColor" stroke-width="1" stroke-opacity="0.5"></line>
+          <text x="60" y="196">01</text><text x="140" y="196">02</text><text x="220" y="196">03</text><text x="300" y="196">04</text><text x="380" y="196">05</text>
+
+          <polygon points="140,130 220,95 300,62 380,32 380,82 300,112 220,138 140,158" style="fill: var(--caution); fill-opacity: 0.14;"></polygon>
+          <text x="240" y="102" text-anchor="middle" style="fill: var(--caution); font-size: 9px; letter-spacing: 0.04em;">RISK ZONE</text>
+
+          <polyline points="60,168 140,130 220,95 300,62 380,32" fill="none" style="stroke: var(--primary); stroke-width: 2;"></polyline>
+          <text x="384" y="30" style="fill: var(--primary); font-size: 10px;">Capability</text>
+
+          <polyline points="60,172 140,158 220,138 300,112 380,82" fill="none" style="stroke: var(--shield); stroke-width: 2;"></polyline>
+          <text x="384" y="86" style="fill: var(--shield); font-size: 10px;">Governance</text>
+        </svg>
+        <figcaption style="font-size: 12px; color: var(--muted-foreground); margin-top: 6px;">Illustrative, not measured: the argument is the shape, not the numbers. Whenever capability outpaces governance, the gap between the two lines is exposure the organization is carrying, whether or not anything has gone wrong yet.</figcaption>
+      </figure>
 
       <div class="table-wrap">
         <table>
