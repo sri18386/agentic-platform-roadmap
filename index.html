@@ -1,0 +1,932 @@
+<title>Agentic Platform Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --background: oklch(0.968 0.005 75);
+    --foreground: oklch(0.176 0.006 285);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.176 0.006 285);
+    --muted: oklch(0.941 0.007 80);
+    --muted-foreground: oklch(0.503 0.014 285);
+    --border: oklch(0.902 0.008 80);
+
+    --primary: oklch(0.446 0.098 158);
+    --primary-foreground: oklch(1 0 0);
+
+    --shield: oklch(0.446 0.070 227);
+    --shield-foreground: oklch(1 0 0);
+    --shield-subtle: oklch(0.960 0.018 227);
+
+    --caution: oklch(0.455 0.086 82);
+    --caution-foreground: oklch(1 0 0);
+    --caution-subtle: oklch(0.968 0.031 90);
+
+    --connect: oklch(0.588 0.013 286);
+    --connect-foreground: oklch(1 0 0);
+
+    --scale-accent: oklch(0.588 0.045 80);
+    --scale-foreground: oklch(1 0 0);
+
+    --shadow-xs: 0 1px 2px oklch(0.176 0.006 285 / 0.05);
+    --shadow-sm: 0 1px 3px oklch(0.176 0.006 285 / 0.06), 0 1px 2px oklch(0.176 0.006 285 / 0.04);
+    --shadow-md: 0 4px 14px oklch(0.176 0.006 285 / 0.07), 0 1px 3px oklch(0.176 0.006 285 / 0.04);
+
+    --radius-lg: 0.875rem;
+    --radius-md: 0.7rem;
+    --radius-full: 999px;
+
+    --font-serif: "Instrument Serif", Georgia, serif;
+    --font-sans: "Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --background: oklch(0.145 0.003 265);
+      --foreground: oklch(0.937 0.003 265);
+      --card: oklch(0.196 0.008 265);
+      --card-foreground: oklch(0.937 0.003 265);
+      --muted: oklch(0.266 0.011 265);
+      --muted-foreground: oklch(0.694 0.015 265);
+      --border: oklch(0.283 0.010 265);
+
+      --primary: oklch(0.672 0.135 158);
+      --primary-foreground: oklch(0.180 0.028 160);
+
+      --shield: oklch(0.771 0.098 225);
+      --shield-foreground: oklch(0.180 0.028 225);
+      --shield-subtle: oklch(0.771 0.098 225 / 14%);
+
+      --caution: oklch(0.812 0.135 82);
+      --caution-foreground: oklch(0.180 0.028 82);
+      --caution-subtle: oklch(0.812 0.135 82 / 14%);
+
+      --connect: oklch(0.694 0.015 265);
+      --connect-foreground: oklch(0.145 0.003 265);
+
+      --scale-accent: oklch(0.75 0.06 80);
+      --scale-foreground: oklch(0.145 0.003 265);
+
+      --shadow-xs: 0 1px 2px oklch(0 0 0 / 0.4);
+      --shadow-sm: 0 1px 3px oklch(0 0 0 / 0.45);
+      --shadow-md: 0 6px 18px oklch(0 0 0 / 0.5);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --background: oklch(0.145 0.003 265);
+    --foreground: oklch(0.937 0.003 265);
+    --card: oklch(0.196 0.008 265);
+    --card-foreground: oklch(0.937 0.003 265);
+    --muted: oklch(0.266 0.011 265);
+    --muted-foreground: oklch(0.694 0.015 265);
+    --border: oklch(0.283 0.010 265);
+
+    --primary: oklch(0.672 0.135 158);
+    --primary-foreground: oklch(0.180 0.028 160);
+
+    --shield: oklch(0.771 0.098 225);
+    --shield-foreground: oklch(0.180 0.028 225);
+    --shield-subtle: oklch(0.771 0.098 225 / 14%);
+
+    --caution: oklch(0.812 0.135 82);
+    --caution-foreground: oklch(0.180 0.028 82);
+    --caution-subtle: oklch(0.812 0.135 82 / 14%);
+
+    --connect: oklch(0.694 0.015 265);
+    --connect-foreground: oklch(0.145 0.003 265);
+
+    --scale-accent: oklch(0.75 0.06 80);
+    --scale-foreground: oklch(0.145 0.003 265);
+
+    --shadow-xs: 0 1px 2px oklch(0 0 0 / 0.4);
+    --shadow-sm: 0 1px 3px oklch(0 0 0 / 0.45);
+    --shadow-md: 0 6px 18px oklch(0 0 0 / 0.5);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.6;
+    padding-inline: 24px;
+    padding-block: 56px 80px;
+  }
+
+  .page {
+    max-width: 880px;
+    margin-inline: auto;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .eyebrow .sep { opacity: 0.5; }
+
+  header.hero {
+    padding-block-end: 40px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+
+  h1 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(34px, 6vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 14px 0 18px;
+    text-wrap: balance;
+  }
+
+  .lede {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--foreground);
+    max-width: 60ch;
+    margin: 0 0 20px;
+  }
+
+  .lede.secondary {
+    color: var(--muted-foreground);
+    font-size: 15px;
+  }
+
+  nav.spine-overview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 28px;
+  }
+
+  nav.spine-overview a {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--card-foreground);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    padding: 7px 14px;
+    text-decoration: none;
+    box-shadow: var(--shadow-xs);
+    white-space: nowrap;
+  }
+  nav.spine-overview a:hover { border-color: var(--phase-color, var(--primary)); }
+  nav.spine-overview a b { font-weight: 500; color: var(--phase-color, var(--primary)); }
+
+  .phase-row {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 20px;
+  }
+
+  .rail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .rail .dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--phase-color);
+    color: var(--phase-color-foreground);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .rail .line {
+    width: 2px;
+    flex: 1;
+    background: var(--border);
+    margin-block: 6px;
+    min-height: 24px;
+  }
+
+  section.phase { margin-bottom: 8px; scroll-margin-top: 24px; }
+
+  .phase-content { padding-bottom: 52px; }
+
+  .phase-content .eyebrow { margin-bottom: 6px; }
+
+  h2 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 30px;
+    margin: 0 0 12px;
+    letter-spacing: -0.01em;
+  }
+
+  .thesis {
+    font-size: 16px;
+    max-width: 58ch;
+    margin: 0 0 24px;
+  }
+
+  .capabilities {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .capability {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    box-shadow: var(--shadow-xs);
+  }
+
+  .capability h3 {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 8px;
+  }
+
+  .capability p {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--muted-foreground);
+    line-height: 1.55;
+  }
+
+  .capability ul {
+    margin: 0;
+    padding-left: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .capability li {
+    font-size: 13.5px;
+    color: var(--muted-foreground);
+    line-height: 1.5;
+  }
+
+  .capability li::marker {
+    color: var(--phase-color, var(--primary));
+  }
+
+  .signal {
+    background: var(--phase-subtle, var(--muted));
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+  }
+
+  .signal .signal-label {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--phase-color);
+    flex-shrink: 0;
+    font-weight: 500;
+  }
+
+  .signal p {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--foreground);
+  }
+
+  /* phase color assignments */
+  #phase-1 { --phase-color: var(--primary); --phase-color-foreground: var(--primary-foreground); --phase-subtle: color-mix(in oklch, var(--primary) 12%, var(--card)); }
+  #phase-2 { --phase-color: var(--connect); --phase-color-foreground: var(--connect-foreground); --phase-subtle: color-mix(in oklch, var(--connect) 14%, var(--card)); }
+  #phase-3 { --phase-color: var(--shield); --phase-color-foreground: var(--shield-foreground); --phase-subtle: var(--shield-subtle); }
+  #phase-4 { --phase-color: var(--caution); --phase-color-foreground: var(--caution-foreground); --phase-subtle: var(--caution-subtle); }
+  #phase-5 { --phase-color: var(--scale-accent); --phase-color-foreground: var(--scale-foreground); --phase-subtle: color-mix(in oklch, var(--scale-accent) 14%, var(--card)); }
+
+  section.modules {
+    padding-top: 8px;
+    padding-bottom: 12px;
+    border-top: 1px solid var(--border);
+    margin-top: 8px;
+  }
+
+  section.modules h2 { font-size: 26px; }
+
+  .module { margin-top: 30px; }
+  .module:first-of-type { margin-top: 20px; }
+
+  .module h3 {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+
+  .module-def {
+    font-size: 13px;
+    color: var(--muted-foreground);
+    margin: 0 0 12px;
+    max-width: 58ch;
+  }
+
+  .module-track {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+  }
+
+  .track-step {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--card);
+    padding: 10px 12px;
+    font-size: 12.5px;
+    line-height: 1.5;
+    box-shadow: var(--shadow-xs);
+  }
+
+  .step-phase {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--step-color);
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+
+  section.synthesis {
+    padding-top: 8px;
+    padding-bottom: 44px;
+    border-top: 1px solid var(--border);
+    margin-top: 8px;
+  }
+
+  section.synthesis h2 { font-size: 26px; }
+
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    margin-top: 24px;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 640px;
+    font-size: 13px;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  thead th {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+    background: var(--muted);
+    font-weight: 500;
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+
+  tbody td:first-child { font-weight: 500; white-space: nowrap; }
+  tbody td:nth-child(2) { color: var(--muted-foreground); }
+
+  footer.closing {
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  footer.closing p {
+    font-size: 13px;
+    color: var(--muted-foreground);
+    max-width: 60ch;
+    margin: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    section.phase, section.synthesis {
+      animation: rise 480ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  }
+
+  @media (max-width: 520px) {
+    body { padding-inline: 16px; }
+    .phase-row { grid-template-columns: 36px 1fr; gap: 14px; }
+    .rail .dot { width: 30px; height: 30px; font-size: 11px; }
+  }
+</style>
+
+<div class="page">
+
+  <header class="hero">
+    <div class="eyebrow">INTERNAL <span class="sep">·</span> PLATFORM STRATEGY <span class="sep">·</span> DRAFT</div>
+    <h1>Agentic Platform Roadmap</h1>
+    <p class="lede">A phase-based view of how the platform grows from single agents doing individual jobs to autonomous, governed action across the organization.</p>
+    <p class="lede secondary">Each phase below depends on the one before it. Skipping a phase does not remove its risk. It moves the risk downstream, to a point where it costs more to see and more to fix.</p>
+
+    <nav class="spine-overview" aria-label="Jump to a phase">
+      <a href="#phase-1" style="--phase-color: var(--primary)"><b>01</b> Foundation</a>
+      <a href="#phase-2" style="--phase-color: var(--connect)"><b>02</b> Orchestration</a>
+      <a href="#phase-3" style="--phase-color: var(--shield)"><b>03</b> Governance</a>
+      <a href="#phase-4" style="--phase-color: var(--caution)"><b>04</b> Autonomous action</a>
+      <a href="#phase-5" style="--phase-color: var(--scale-accent)"><b>05</b> Scale</a>
+      <a href="#modules" style="--phase-color: var(--muted-foreground)">Modules</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="phase" id="phase-1">
+      <div class="phase-row">
+        <div class="rail"><div class="dot">01</div><div class="line"></div></div>
+        <div class="phase-content">
+          <div class="eyebrow">Phase 01</div>
+          <h2>Foundation</h2>
+          <p class="thesis">Give every team a way to put a working agent into production, without waiting on a central build queue.</p>
+
+          <div class="capabilities">
+            <div class="capability">
+              <h3>Role-based agents</h3>
+              <ul>
+                <li>Scoped to a specific job function such as support, research or outbound sales, carrying the prompts, knowledge and permissions that role needs</li>
+                <li>Built through a no-code interface</li>
+                <li>Every configuration change saved as a version that can be restored</li>
+              </ul>
+            </div>
+            <div class="capability">
+              <h3>Skill-based agents</h3>
+              <ul>
+                <li>Composable skill modules such as a lookup, a calculation or a document search, that snap onto any agent</li>
+                <li>Capability becomes a shared library instead of a rewrite for every new use case</li>
+              </ul>
+            </div>
+            <div class="capability">
+              <h3>Conversational agent builder</h3>
+              <ul>
+                <li>Build an agent by describing what's needed in plain language</li>
+                <li>The builder asks clarifying questions until the configuration is right, instead of a form filled in field by field</li>
+              </ul>
+            </div>
+            <div class="capability">
+              <h3>Structured and multi-format output</h3>
+              <ul>
+                <li>A response shaped to a defined schema instead of loose text</li>
+                <li>Illustrated with examples of the interaction it's meant to handle</li>
+                <li>Returned as an image or a downloadable file when the task calls for it</li>
+              </ul>
+            </div>
+            <div class="capability">
+              <h3>Developer runtime</h3>
+              <ul>
+                <li>An SDK and APIs under the same agent objects the no-code layer produces, for logic a builder UI can't express</li>
+                <li>Every agent goes live behind its own endpoint the moment it's created, schedulable, cron-triggered or fired by a webhook</li>
+                <li>Can be defined and versioned entirely as files in a repository a team already owns, including promoting a change between branches</li>
+              </ul>
+            </div>
+            <div class="capability">
+              <h3>Conversational app builder</h3>
+              <ul>
+                <li>Goes from a prompt to a deployed application, agent, frontend, backend and login included, without hand-coding the plumbing</li>
+                <li>A testing pass catches and fixes issues in what it built automatically</li>
+                <li>Code, secrets and domain stay in the team's own control rather than locked to the builder</li>
+              </ul>
+            </div>
+            <div class="capability">
+              <h3>Planning and reuse</h3>
+              <ul>
+                <li>A planning stage produces a spec, a brief, diagrams and starter files before a line is built</li>
+                <li>Pulls in a company's own brand guidelines, existing tools and previously built agents</li>
+                <li>A new app never starts from a blank slate</li>
+              </ul>
+            </div>
+            <div class="capability">
+              <h3>Visual automation canvas</h3>
+              <ul>
+                <li>A node-based canvas chaining triggers, API calls, data transforms, conditionals and repeat-until loops</li>
+                <li>Works with or without an agent in the loop</li>
+                <li>Often the fastest way from an idea to something running, useful before a single custom agent exists</li>
+              </ul>
+            </div>
+            <div class="capability">
+              <h3>Channel connectivity</h3>
+              <p>The same agent dropped into a messaging platform a team already uses, instead of a custom chat interface built and maintained just for it.</p>
+            </div>
+          </div>
+
+          <div class="signal">
+            <span class="signal-label">Ready for next</span>
+            <p>Multiple teams are running standalone agents in production, and the next bottleneck is coordination between them rather than the number of agents built.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="phase" id="phase-2">
+      <div class="phase-row">
+        <div class="rail"><div class="dot">02</div><div class="line"></div></div>
+        <div class="phase-content">
+          <div class="eyebrow">Phase 02</div>
+          <h2>Orchestration</h2>
+          <p class="thesis">Point the same canvas at multiple agents instead of individual steps, so they hand off, branch and share context instead of running in isolation.</p>
+
+          <div class="capabilities">
+            <div class="capability">
+              <h3>Multi-agent handoffs</h3>
+              <ul>
+                <li>The same canvas, now sequencing between agents rather than plain steps</li>
+                <li>Supports nested sub-flows</li>
+                <li>Can resume a run from any point after it fails</li>
+              </ul>
+            </div>
+            <div class="capability">
+              <h3>Shared context layer</h3>
+              <p>State that persists across a multi-agent run instead of resetting at every handoff, so a workflow remembers what happened three steps ago.</p>
+            </div>
+            <div class="capability">
+              <h3>Routing</h3>
+              <ul>
+                <li>A classifier step inspects the request first</li>
+                <li>Sends it down the specific path built for that kind of work, instead of running everything through one general path</li>
+              </ul>
+            </div>
+            <div class="capability">
+              <h3>Manager-agent pattern</h3>
+              <ul>
+                <li>A coordinating agent assigns work across a set of specialized sub-agents and lets them find the path non-deterministically</li>
+                <li>For tasks where the right sequence isn't known ahead of time</li>
+              </ul>
+            </div>
+            <div class="capability">
+              <h3>Agent swarm</h3>
+              <ul>
+                <li>The same subtask sent to many parallel instances of one agent at once, dividing a large task by volume rather than by specialization</li>
+                <li>The pattern to reach for when the bottleneck is throughput, not decision-making</li>
+              </ul>
+            </div>
+            <div class="capability">
+              <h3>Evaluator-optimizer loop</h3>
+              <ul>
+                <li>One agent produces a draft, a second independent one critiques it against a rubric</li>
+                <li>Catches a flawed first attempt before it reaches a person or another system</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="signal">
+            <span class="signal-label">Ready for next</span>
+            <p>Multi-step agent workflows are running in production, and the constraint shifts from capability to trust. Manager-agent and swarm patterns measurably help parallel work but can hurt a task that's inherently sequential, so they're a tool to reach for selectively, not a default. Before agents touch anything higher-stakes, the organization needs to see and gate what they do.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="phase" id="phase-3">
+      <div class="phase-row">
+        <div class="rail"><div class="dot">03</div><div class="line"></div></div>
+        <div class="phase-content">
+          <div class="eyebrow">Phase 03</div>
+          <h2>Governance</h2>
+          <p class="thesis">Earn the right to widen agent scope by making agent behavior visible, gated and explainable.</p>
+
+          <div class="capabilities">
+            <div class="capability">
+              <h3>Control plane</h3>
+              <ul>
+                <li>Guardrails and policy enforcement applied centrally, a rule set once rather than rebuilt inside every agent</li>
+                <li>Governs an agent whether it was built natively, imported from elsewhere, or reached through an intermediary</li>
+                <li>Deploys to whichever cloud the data needs to live in</li>
+                <li>One registry to see every agent regardless of where it came from</li>
+              </ul>
+            </div>
+            <div class="capability">
+              <h3>Human-in-the-loop checkpoints</h3>
+              <ul>
+                <li>Approval gates placed on the actions that carry real consequence, configured by risk level rather than applied everywhere by default</li>
+                <li>As autonomy increases, the posture shifts from approving each action to supervising a stream of them</li>
+              </ul>
+            </div>
+            <div class="capability">
+              <h3>Observability and evaluation</h3>
+              <ul>
+                <li>A record of what an agent decided and why</li>
+                <li>An automated way to test against a set of cases, catch failures, and have the agent rewrite its own instructions to fix them before anything ships</li>
+                <li>Every response checked for whether it's actually grounded in the source it cites, not merely plausible-sounding</li>
+                <li>Scoring covers the path taken, not just the final answer, since two runs can reach the same result by very different, not equally safe, routes</li>
+              </ul>
+            </div>
+            <div class="capability">
+              <h3>Iteration and kill controls</h3>
+              <ul>
+                <li>A ceiling on how many reasoning or tool-call steps a single run can take</li>
+                <li>Ability to kill a run mid-execution if it's behaving abnormally</li>
+                <li>A stuck agent fails safely instead of spinning indefinitely</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="signal">
+            <span class="signal-label">Ready for next</span>
+            <p>Leadership can answer what agents did this week and why, without pulling logs by hand. That visibility is what makes the next phase safe to open.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="phase" id="phase-4">
+      <div class="phase-row">
+        <div class="rail"><div class="dot">04</div><div class="line"></div></div>
+        <div class="phase-content">
+          <div class="eyebrow">Phase 04</div>
+          <h2>Autonomous action</h2>
+          <p class="thesis">The highest-leverage and highest-risk phase in the roadmap. Agents that act through channels built for people, operating existing software or a phone line, rather than waiting on a purpose-built integration.</p>
+
+          <div class="capabilities">
+            <div class="capability">
+              <h3>Direct software operation</h3>
+              <ul>
+                <li>Drives a user interface directly, clicking, filling forms and reading a screen</li>
+                <li>Works on systems that expose no API to integrate against</li>
+                <li>Runs inside a session with its own access controls and a full record of every step it took</li>
+              </ul>
+            </div>
+            <div class="capability">
+              <h3>Voice and telephony</h3>
+              <ul>
+                <li>Places and receives real phone calls, carrying the same knowledge, tools and sub-agents it has everywhere else</li>
+                <li>Latency low enough to hold a real-time exchange</li>
+                <li>An organization's own speech models can sit underneath it</li>
+                <li>A call can be handed to a person the moment the conversation calls for one</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="signal">
+            <span class="signal-label">Load-bearing dependency</span>
+            <p>This phase only works if Phase 03 is real rather than aspirational. Governance gaps that were invisible at Phase 02 turn into incidents here.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="phase" id="phase-5">
+      <div class="phase-row">
+        <div class="rail"><div class="dot">05</div></div>
+        <div class="phase-content">
+          <div class="eyebrow">Phase 05</div>
+          <h2>Scale</h2>
+          <p class="thesis">Turn one team's working pattern into the default for every team.</p>
+
+          <div class="capabilities">
+            <div class="capability">
+              <h3>Template library</h3>
+              <ul>
+                <li>Proven agent and workflow configurations packaged for reuse</li>
+                <li>Published across an organization so a new team starts from a working pattern instead of a blank canvas</li>
+                <li>A shared catalog of ready-made agents for the cases nobody wants to build from scratch</li>
+              </ul>
+            </div>
+            <div class="capability">
+              <h3>Flexible deployment</h3>
+              <ul>
+                <li>Public cloud, private cloud, or fully on-premise including local models</li>
+                <li>Autoscales to demand automatically wherever it runs, matched to data sensitivity</li>
+                <li>A dedicated appliance for the most sensitive workloads, running entirely inside a company's own walls with no call leaving the building</li>
+              </ul>
+            </div>
+            <div class="capability">
+              <h3>Function-specific packages</h3>
+              <ul>
+                <li>Pre-configured bundles for a given function such as finance operations, claims or support</li>
+                <li>Not a generic starting point every team customizes from zero</li>
+              </ul>
+            </div>
+            <div class="capability">
+              <h3>Shared organizational context</h3>
+              <ul>
+                <li>A set of facts and instructions defined once and inherited by every agent in the organization</li>
+                <li>Replaces the same policy or tone guideline being copy-pasted into each one separately</li>
+              </ul>
+            </div>
+            <div class="capability">
+              <h3>White-label embedding</h3>
+              <ul>
+                <li>The building and runtime experience carries a company's own brand, theme and design language</li>
+                <li>For teams embedding this into a product they ship to their own customers</li>
+              </ul>
+            </div>
+            <div class="capability">
+              <h3>Modular adoption</h3>
+              <ul>
+                <li>Every module, agents, knowledge, guardrails, evaluation, usable on its own</li>
+                <li>Couples with agents built elsewhere through its own API</li>
+                <li>No all-or-nothing commitment required to adopt any of it</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="signal">
+            <span class="signal-label">Feedback loop</span>
+            <p>There is no ceiling phase after this one. Scale feeds back into Phase 01, as patterns proven here become the templates a new team starts from.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="modules" id="modules">
+      <div class="eyebrow">Cross-cutting</div>
+      <h2>Platform modules</h2>
+      <p class="thesis">The five phases above are what to build in order. The modules below are not a sixth phase. They are infrastructure that has to mature in parallel underneath every phase, or the phase built on top of them ends up weaker than it looks.</p>
+
+      <div class="module">
+        <h3>Knowledge and retrieval</h3>
+        <p class="module-def">How an agent finds a fact it doesn't already have, from documents, structured data or the web.</p>
+        <div class="module-track">
+          <div class="track-step" style="--step-color: var(--primary)"><span class="step-phase">01 Foundation</span>Standard retrieval over a set of uploaded documents, one knowledge base attached per agent.</div>
+          <div class="track-step" style="--step-color: var(--connect)"><span class="step-phase">02 Orchestration</span>A single request pulls from multiple knowledge sources in one pass, and a workflow step can query structured data directly in plain language, not just documents.</div>
+          <div class="track-step" style="--step-color: var(--shield)"><span class="step-phase">03 Governance</span>Retrieval is auditable, so an answer traces back to the exact source and passage it came from, part of the same evidence trail as everything else the agent did.</div>
+          <div class="track-step" style="--step-color: var(--caution)"><span class="step-phase">04 Autonomous action</span>Knowledge sources stay live and synced rather than a one-time upload, since an agent acting on stale information is worse than one that just answers slowly.</div>
+          <div class="track-step" style="--step-color: var(--scale-accent)"><span class="step-phase">05 Scale</span>A knowledge base or graph ships pre-connected as part of a template, built from the sources a given function already trusts.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <h3>Tools and integrations</h3>
+        <p class="module-def">What an agent can reach outside its own reasoning, and how it authenticates to reach it.</p>
+        <div class="module-track">
+          <div class="track-step" style="--step-color: var(--primary)"><span class="step-phase">01 Foundation</span>A library of pre-built connections to common business tools, plus the ability to call any API as a custom tool.</div>
+          <div class="track-step" style="--step-color: var(--connect)"><span class="step-phase">02 Orchestration</span>A single tool call is scoped to only the specific ability a step actually needs, instead of granting a tool's entire surface to an agent.</div>
+          <div class="track-step" style="--step-color: var(--shield)"><span class="step-phase">03 Governance</span>Authentication runs per user rather than on one shared credential, a call executes under the permissions of the person actually using the agent, and a tool's own definition is verified before it's trusted, not just the credential calling it.</div>
+          <div class="track-step" style="--step-color: var(--caution)"><span class="step-phase">04 Autonomous action</span>An open protocol lets an agent reach a tool or data source it wasn't specifically integrated with in advance, and a second one lets it discover and call another agent the same way, through a shared or self-hosted repository of connections.</div>
+          <div class="track-step" style="--step-color: var(--scale-accent)"><span class="step-phase">05 Scale</span>A team's own custom connections publish back into that shared repository, so the next agent that needs one doesn't rebuild the integration.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <h3>Memory</h3>
+        <p class="module-def">What an agent, or a chain of agents, is able to recall and for how long.</p>
+        <div class="module-track">
+          <div class="track-step" style="--step-color: var(--primary)"><span class="step-phase">01 Foundation</span>Per-agent working memory only. Nothing persists once a session ends.</div>
+          <div class="track-step" style="--step-color: var(--connect)"><span class="step-phase">02 Orchestration</span>A shared context object travels with a workflow run, so step four remembers step one.</div>
+          <div class="track-step" style="--step-color: var(--shield)"><span class="step-phase">03 Governance</span>Memory access becomes auditable, and what gets written into memory is validated before it's trusted, so a fabricated memory can't quietly steer a later run.</div>
+          <div class="track-step" style="--step-color: var(--caution)"><span class="step-phase">04 Autonomous action</span>Task-level memory persists across a long-running action, and can be shared agent-to-agent rather than staying siloed inside the one that created it.</div>
+          <div class="track-step" style="--step-color: var(--scale-accent)"><span class="step-phase">05 Scale</span>Memory schemas ship packaged with a template, instead of being designed fresh per team.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <h3>Model routing</h3>
+        <p class="module-def">Which model handles a given request, and what happens when that model is slow, unavailable or wrong for the job.</p>
+        <div class="module-track">
+          <div class="track-step" style="--step-color: var(--primary)"><span class="step-phase">01 Foundation</span>A single model configured by hand per agent, chosen once when the agent is built.</div>
+          <div class="track-step" style="--step-color: var(--connect)"><span class="step-phase">02 Orchestration</span>A workflow calls a different model per step, matched to what that specific step needs rather than one setting for the whole run.</div>
+          <div class="track-step" style="--step-color: var(--shield)"><span class="step-phase">03 Governance</span>Fallback models and a shared gateway become policy rather than per-agent configuration, so one provider's outage doesn't take an agent down.</div>
+          <div class="track-step" style="--step-color: var(--caution)"><span class="step-phase">04 Autonomous action</span>Model choice affects real consequences directly, so a higher-risk action can be pinned to a more reliable tier instead of the cheapest one available.</div>
+          <div class="track-step" style="--step-color: var(--scale-accent)"><span class="step-phase">05 Scale</span>Requests auto-route to the cheapest capable tier by default, and a proven workload can be progressively moved off an expensive frontier model onto a smaller model the organization owns outright.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <h3>Guardrails</h3>
+        <p class="module-def">What an agent is prevented from doing, regardless of what it was asked.</p>
+        <div class="module-track">
+          <div class="track-step" style="--step-color: var(--primary)"><span class="step-phase">01 Foundation</span>Basic input and output filtering, plus fairness and bias checks, tested by hand before either is attached to an agent.</div>
+          <div class="track-step" style="--step-color: var(--connect)"><span class="step-phase">02 Orchestration</span>A rule applies consistently across an entire workflow chain, not only at the first step.</div>
+          <div class="track-step" style="--step-color: var(--shield)"><span class="step-phase">03 Governance</span>One policy engine enforces the rule everywhere, whether the check runs natively or through an outside provider plugged in behind it.</div>
+          <div class="track-step" style="--step-color: var(--caution)"><span class="step-phase">04 Autonomous action</span>Guardrails gate the real-world action itself, not only the text describing it, before the action fires.</div>
+          <div class="track-step" style="--step-color: var(--scale-accent)"><span class="step-phase">05 Scale</span>Guardrail packs come prebuilt per industry or function, rather than authored from scratch by each team.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <h3>Observability</h3>
+        <p class="module-def">How anyone outside an agent's own run finds out what it actually did.</p>
+        <div class="module-track">
+          <div class="track-step" style="--step-color: var(--primary)"><span class="step-phase">01 Foundation</span>Per-agent run logs, unstructured and read one at a time.</div>
+          <div class="track-step" style="--step-color: var(--connect)"><span class="step-phase">02 Orchestration</span>A single trace follows a request across an entire multi-agent workflow, not just one hop.</div>
+          <div class="track-step" style="--step-color: var(--shield)"><span class="step-phase">03 Governance</span>A full decision record, plus a way to score agent output against a rubric using a separate model as judge, before it ships.</div>
+          <div class="track-step" style="--step-color: var(--caution)"><span class="step-phase">04 Autonomous action</span>Session replay for an autonomous run, showing every click and read the agent made, in order.</div>
+          <div class="track-step" style="--step-color: var(--scale-accent)"><span class="step-phase">05 Scale</span>Cross-team dashboards built on exported trace data, with automatic alerts on a spend or failure spike, so one team's agent quality can be benchmarked against another's.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <h3>Access and tenancy</h3>
+        <p class="module-def">Who can build, run, approve or see a given agent, and how one team's workspace stays separate from another's.</p>
+        <div class="module-track">
+          <div class="track-step" style="--step-color: var(--primary)"><span class="step-phase">01 Foundation</span>A single flat workspace, where every builder can see every other builder's agents.</div>
+          <div class="track-step" style="--step-color: var(--connect)"><span class="step-phase">02 Orchestration</span>Sharing controls on an individual resource, so a specific agent or workflow can be shared with a chosen set of teammates.</div>
+          <div class="track-step" style="--step-color: var(--shield)"><span class="step-phase">03 Governance</span>Role-based access and single sign-on tie agent permissions to the same identity system as the rest of the company, secrets pulled from an enterprise vault, and each agent carries its own verifiable identity distinct from the person who built it.</div>
+          <div class="track-step" style="--step-color: var(--caution)"><span class="step-phase">04 Autonomous action</span>Access gets audited at the same granularity as the action itself, and when one agent invokes another it can verify what it's actually been delegated to do rather than trusting the first agent's say-so.</div>
+          <div class="track-step" style="--step-color: var(--scale-accent)"><span class="step-phase">05 Scale</span>Isolated sub-account workspaces let a department, client or business unit run independently under one parent account, with an admin view spanning all of them and a way to reassign an agent's ownership when the person who built it leaves.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <h3>FinOps</h3>
+        <p class="module-def">Who is spending what, on which agent, and whether that spend is earning its keep.</p>
+        <div class="module-track">
+          <div class="track-step" style="--step-color: var(--primary)"><span class="step-phase">01 Foundation</span>Token usage visible per agent. No budget or spend controls yet.</div>
+          <div class="track-step" style="--step-color: var(--connect)"><span class="step-phase">02 Orchestration</span>Cost attributed per workflow run rather than per isolated agent call.</div>
+          <div class="track-step" style="--step-color: var(--shield)"><span class="step-phase">03 Governance</span>Budget alerts and spend caps set at the level of the org, a sub-account, a user or a single agent, enforced by the same policy layer that enforces safety rules.</div>
+          <div class="track-step" style="--step-color: var(--caution)"><span class="step-phase">04 Autonomous action</span>Cost-aware routing to a cheaper model or path when the task allows it, tracked per completed task rather than per token.</div>
+          <div class="track-step" style="--step-color: var(--scale-accent)"><span class="step-phase">05 Scale</span>Forecasting and chargeback in terms of cost per completed outcome, not just raw spend, with spend attributed back to the business unit that owns the use case.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="synthesis">
+      <div class="eyebrow">Reading the roadmap</div>
+      <h2>One argument, five phases</h2>
+      <p class="thesis">Capability should never outrun governance. Every phase after Foundation either adds capability or catches up on control, and the two need to stay roughly level. An organization that reaches Phase 04 without a real Phase 03 has only deferred the cost of governance, to the moment an agent does something no one approved. Independent industry estimates put the share of agentic AI projects canceled by 2027 above 40 percent, most often from cost overruns, unclear value, or exactly this gap between capability and control.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Phase</th>
+              <th>Focus</th>
+              <th>Key capabilities</th>
+              <th>Depends on</th>
+              <th>Risk if skipped</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>01 Foundation</td>
+              <td>Ship individual agents</td>
+              <td>Role-based and skill-based agents, conversational and no-code builders, structured output, developer runtime, automation canvas, channel connectivity</td>
+              <td>Nothing, starting point</td>
+              <td>Duplicated effort, no shared skill library</td>
+            </tr>
+            <tr>
+              <td>02 Orchestration</td>
+              <td>Coordinate agents</td>
+              <td>Multi-agent handoffs, shared context layer, routing, manager-agent pattern, agent swarm, evaluator-optimizer loop</td>
+              <td>Foundation</td>
+              <td>Workflows stay manual, agents can't hand off work</td>
+            </tr>
+            <tr>
+              <td>03 Governance</td>
+              <td>Make behavior visible and gated</td>
+              <td>Control plane, human-in-the-loop checkpoints, observability and evaluation, iteration and kill controls</td>
+              <td>Orchestration</td>
+              <td>No way to catch a bad decision before it compounds</td>
+            </tr>
+            <tr>
+              <td>04 Autonomous action</td>
+              <td>Agents that act through real channels</td>
+              <td>Direct software operation, voice and telephony</td>
+              <td>Governance</td>
+              <td>Ungoverned agents taking real-world actions</td>
+            </tr>
+            <tr>
+              <td>05 Scale</td>
+              <td>Make patterns reusable</td>
+              <td>Template and blueprint library, flexible deployment, function-specific packages, shared organizational context, white-label embedding, modular adoption</td>
+              <td>All prior phases</td>
+              <td>Every team reinvents the same agent from scratch</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="closing">
+    <p>Working draft for internal planning. Phase boundaries are about dependency order, not fixed calendar dates, and a team can be in more than one phase at once for different use cases.</p>
+  </footer>
+
+</div>
